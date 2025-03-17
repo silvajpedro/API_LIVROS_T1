@@ -62,7 +62,7 @@ def doar():
         # Inserimos os dados do novo livro na tabela "LIVROS"
         # Essa query SQL adiciona os valores de título, categoria, autor e imagem_url na tabela
         conn.execute(f"""
-        INSERT INTO LIVROS (titulo, categoria, autor, imagem_url) 
+        INSERT INTO LIVROS (titulo, categoria, autor, image_url) 
         VALUES ("{titulo}", "{categoria}", "{autor}", "{image_url}")
         """)  # Essa operação insere os dados diretamente no banco de dados
     
