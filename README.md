@@ -68,5 +68,3 @@ Retorna todos os livros cadastrados em nossa API.
 ```
 
 ---
-
-![Imagem da página de doação de livros](image-1.png)

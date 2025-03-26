@@ -4,10 +4,16 @@ import sqlite3
 # Importamos o Flask (para criar a API), o request (para acessar os dados enviados pelo usuário)
 # e o jsonify (para retornar os dados em formato JSON)
 from flask import Flask, request, jsonify  
+from flask_cors import CORS
 
 # Criamos a aplicação Flask
 # "__name__" indica que este é o arquivo principal do projeto
 app = Flask(__name__)
+CORS(app)
+
+
+# CORS - Cross Origin Resource Sharing (Compartilhamento de Recursos entre origens diferentes)
+
 
 # 🔹 Criamos uma rota principal "/" que será a página inicial da API
 # Quando acessarmos http://127.0.0.1:5000/ no navegador, essa função será executada
