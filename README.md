@@ -58,13 +58,29 @@ Retorna todos os livros cadastrados em nossa API.
 
 **Resposta (200)**:
 ```json
-{
+[
+ {
     "id":"1",
     "titulo":"50 Tons de dívida",
     "categoria":"Finanças",
     "autor":"Fernando Polia",
     "image_url":"https://exemplo.com"
-}
+ }
+]
 ```
+--- 
 
+## Tecnologias Utilizadas
+
+- Python 3
+- Flask
+- SQLite
+- Flask-CORS
+
+<<<<<<< HEAD
 ---
+=======
+---
+
+Feito por João Pedro Belo
+>>>>>>> 949fff4d34aaf4275828e3cc1c072dde1639100a
