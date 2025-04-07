@@ -1,9 +1,9 @@
 # Importamos a biblioteca sqlite3, que permite criar e manipular um banco de dados local no formato SQLite
-import sqlite3  
+import sqlite3
 
 # Importamos o Flask (para criar a API), o request (para acessar os dados enviados pelo usuário)
 # e o jsonify (para retornar os dados em formato JSON)
-from flask import Flask, request, jsonify  
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 # Criamos a aplicação Flask
@@ -24,6 +24,8 @@ def manda_o_pix():
 
 # 🔹 Criamos uma função chamada init_db() para inicializar o banco de dados
 # Ela cria a tabela "LIVROS" caso ainda não exista, garantindo que o sistema esteja pronto para uso
+
+
 def init_db():
     # Abrimos uma conexão com o arquivo "database.db" (cria o arquivo caso ele ainda não exista)
     # O "with" garante que a conexão será encerrada de forma segura após o uso
@@ -39,7 +41,43 @@ def init_db():
                     image_url TEXT NOT NULL               -- Link da imagem do livro (campo obrigatório)
                 )
             """
-        )  # O comando acima garante que a estrutura do banco estará pronta para uso
+        )
+
+        # O comando acima garante que a estrutura do banco estará pronta para uso
+
+# ----------------------------------------------------------------------------------------------------------------
+# ESTRUTURA PARA DEIXAR VALORES SALVOS NO BANCO DE DADOS
+
+# Executa uma consulta SQL para contar quantos livros existem na tabela "livros"
+# Depois, usa fetchone()[0] para pegar apenas o número da contagem
+    quantidade = conn.execute("SELECT COUNT(*) FROM livros").fetchone()[0]
+
+# Se não existir nenhum livro cadastrado (ou seja, quantidade == 0)
+    if quantidade == 0:
+    
+    # Cria uma lista de livros padrão, cada livro é uma tupla com:
+    # (título, categoria, autor, link da imagem)
+        livros_padrao = [
+            ("O Hobbit", "Fantasia", "J.R.R. Tolkien", "https://m.media-amazon.com/images/I/91M9xPIf10L.jpg"),
+            ("1984", "Ficção Científica", "George Orwell", "https://m.media-amazon.com/images/I/819js3EQwbL._AC_UF1000,1000_QL80_.jpg"),
+            ("Dom Casmurro", "Romance", "Machado de Assis", "https://m.media-amazon.com/images/I/61Z2bMhGicL.jpg"),
+        ]
+
+    # Percorre cada livro da lista de livros padrão
+        for livro in livros_padrao:
+        # Separa os dados de cada livro em variáveis individuais
+            titulo, categoria, autor, image_url = livro
+        
+        # Insere o livro no banco de dados, preenchendo os campos da tabela
+            conn.execute(f'''
+                INSERT INTO livros (titulo, categoria, autor, image_url)
+                VALUES ("{titulo}", "{categoria}", "{autor}", "{image_url}")
+            ''')
+        
+        # Salva (confirma) a inserção do livro no banco de dados
+        conn.commit()
+ 
+# -------------------------------------------------------------------------------------------------------------------
 
 # Chamamos a função init_db() para garantir que o banco esteja criado ao iniciar o servidor
 init_db()
